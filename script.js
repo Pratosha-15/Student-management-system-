@@ -84,6 +84,9 @@ function searchStudent() {
 function saveStudents() {
     localStorage.setItem("students", JSON.stringify(students));
 }
-
 function clearFields() {
-    document.getElementById("
+    document.getElementById("studentId").value = "";
+    document.getElementById("studentName").value = "";
+    document.getElementById("studentAge").value = "";
+    document.getElementById("studentCourse").value = "";
+}
