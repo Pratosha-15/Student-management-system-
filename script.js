@@ -53,6 +53,10 @@ function displayStudents() {
         </tr>
         `;
     });
+    updateTotalStudents();
+}
+function updateTotalStudents() {
+    document.getElementById("totalStudents").textContent = students.length;
 }
 
 function editStudent(index) {
