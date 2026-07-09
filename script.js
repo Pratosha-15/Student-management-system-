@@ -13,8 +13,10 @@ function addStudent() {
         return;
     }
 
-    // Check duplicate Student ID
-    const duplicate = students.find(student => student.id === id);
+    // Check for duplicate Student ID
+    const duplicate = students.some(student =>
+        student.id.trim().toLowerCase() === id.toLowerCase()
+    );
 
     if (duplicate) {
         alert("Student ID already exists!");
@@ -22,10 +24,10 @@ function addStudent() {
     }
 
     students.push({
-        id: id,
-        name: name,
-        age: age,
-        course: course
+        id,
+        name,
+        age,
+        course
     });
 
     saveStudents();
@@ -48,7 +50,8 @@ function displayStudents() {
                 <button class="action-btn edit" onclick="editStudent(${index})">Edit</button>
                 <button class="action-btn delete" onclick="deleteStudent(${index})">Delete</button>
             </td>
-        </tr>`;
+        </tr>
+        `;
     });
 }
 
@@ -76,14 +79,16 @@ function searchStudent() {
     const rows = document.querySelectorAll("#studentTable tr");
 
     rows.forEach(row => {
-        const text = row.innerText.toLowerCase();
-        row.style.display = text.includes(search) ? "" : "none";
+        row.style.display = row.innerText.toLowerCase().includes(search)
+            ? ""
+            : "none";
     });
 }
 
 function saveStudents() {
     localStorage.setItem("students", JSON.stringify(students));
 }
+
 function clearFields() {
     document.getElementById("studentId").value = "";
     document.getElementById("studentName").value = "";
