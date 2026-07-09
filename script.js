@@ -13,7 +13,21 @@ function addStudent() {
         return;
     }
 
-    students.push({ id, name, age, course });
+    // Check duplicate Student ID
+    const duplicate = students.find(student => student.id === id);
+
+    if (duplicate) {
+        alert("Student ID already exists!");
+        return;
+    }
+
+    students.push({
+        id: id,
+        name: name,
+        age: age,
+        course: course
+    });
+
     saveStudents();
     clearFields();
     displayStudents();
@@ -50,7 +64,7 @@ function editStudent(index) {
 }
 
 function deleteStudent(index) {
-    if (confirm("Delete this student?")) {
+    if (confirm("Are you sure you want to delete this student?")) {
         students.splice(index, 1);
         saveStudents();
         displayStudents();
@@ -72,8 +86,4 @@ function saveStudents() {
 }
 
 function clearFields() {
-    document.getElementById("studentId").value = "";
-    document.getElementById("studentName").value = "";
-    document.getElementById("studentAge").value = "";
-    document.getElementById("studentCourse").value = "";
-}
+    document.getElementById("
